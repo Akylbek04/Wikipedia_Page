@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const app = express();
 
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -36,20 +35,18 @@ app.route("/articles")
     }
 })
 
-.post(function(req,res){
-
+.post(async function(req, res) {
+  try {
     const newArticle = new Article({
-        title: req.body.title,
-        content: req.body.content
+      title: req.body.title,
+      content: req.body.content
     });
 
-    newArticle.save(function(err){
-        if(!err){
-            res.send("Successfully added a new article!");
-        } else {
-            res.send(err);
-        }
-    });
+    await newArticle.save();
+    res.send("Successfully added a new article!");
+  } catch (err) {
+    res.send(err);
+  }
 })
 
 .delete(async function(req, res){
