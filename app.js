@@ -26,7 +26,7 @@ const Article = mongoose.model("Article", articleSchema);
 
 app.route("/articles")
 
-.get(async function(req, res) {
+.get(async (req, res) => {
     try {
         const foundArticles = await Article.find({});
         res.send(foundArticles);
@@ -35,7 +35,7 @@ app.route("/articles")
     }
 })
 
-.post(async function(req, res) {
+.post(async (req, res) => {
   try {
     const newArticle = new Article({
       title: req.body.title,
@@ -49,7 +49,7 @@ app.route("/articles")
   }
 })
 
-.delete(async function(req, res){
+.delete(async (req, res) => {
     try {
         await Article.deleteMany();
         res.send("Successfully deleted.");
@@ -63,7 +63,7 @@ app.route("/articles")
 
 app.route("/articles/:articleTitle")
 
-.get(async function(req, res){
+.get(async (req, res) => {
   try {
     const foundArticle = await Article.findOne({title: req.params.articleTitle});
     if (foundArticle) {
@@ -76,7 +76,7 @@ app.route("/articles/:articleTitle")
   }
 })
 
-.put(async function(req, res){
+.put(async (req, res) => {
   try {
     await Article.updateOne(
       {title: req.params.articleTitle},
@@ -89,7 +89,7 @@ app.route("/articles/:articleTitle")
   }
 })
 
-.patch(async function(req, res){
+.patch(async (req, res) => {
   try {
     await Article.updateOne(
       {title: req.params.articleTitle},
@@ -101,7 +101,7 @@ app.route("/articles/:articleTitle")
   }
 })
 
-.delete(async function(req, res){
+.delete(async (req, res) => {
   try {
     await Article.deleteOne(
       {title: req.params.articleTitle}
@@ -113,6 +113,6 @@ app.route("/articles/:articleTitle")
 });
 
 
-app.listen(3000, function() {
+app.listen(3000, () => {
   console.log("Server started on port 3000");
 });
